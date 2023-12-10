@@ -1,0 +1,172 @@
+ calculator
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/num1"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="enter first number" />
+
+    <EditText
+        android:id="@+id/num2"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="100dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="enter second number" />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="300dp"
+        android:layout_height="wrap_content"
+        android:text="+" />
+
+    <Button
+        android:id="@+id/sub"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginStart="110dp"
+        android:layout_height="wrap_content"
+        android:text="-" />
+
+    <Button
+        android:id="@+id/mul"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="300dp"
+        android:layout_height="wrap_content"
+        android:text="*" />
+
+    <Button
+        android:id="@+id/div"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginStart="310dp"
+        android:layout_height="wrap_content"
+        android:text="/" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="400dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clear" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_marginTop="500dp"
+        android:layout_marginStart="160dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+</RelativeLayout>
+
+
+
+
+
+package com.example.myapplicationcalculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    private boolean areNumbersEmpty(TextView n1, TextView n2) {
+        if (n1.getText().toString().isEmpty() || n2.getText().toString().isEmpty()) {
+            Toast.makeText(MainActivity.this, "Please enter both numbers", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
+        return false;
+    }
+   private boolean divByZero (TextView n1 ,TextView n2){
+        if(n1.getText().toString().equals("0") || n2.getText().toString().equals("0"))
+        {
+            Toast.makeText(MainActivity.this, "cannot divide zero", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
+   }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        TextView num1=findViewById(R.id.num1);
+        TextView num2=findViewById(R.id.num2);
+        Button add =findViewById(R.id.add);
+        Button sub=findViewById(R.id.sub);
+        Button div=findViewById(R.id.div);
+        Button mul=findViewById(R.id.mul);
+        Button clear=findViewById(R.id.clear);
+        TextView tv=findViewById(R.id.result);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(areNumbersEmpty(num1,num2))
+                {
+                    return;
+                }
+                else{
+                    float number1=Float.parseFloat(num1.getText().toString());
+                    float number2=Float.parseFloat(num2.getText().toString());
+                    float result=number1+number2;
+                    tv.setText(String.valueOf(result));
+                }
+
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             tv.setText( " ");
+             num1.setText( " ");
+             num2.setText(" ");
+            }
+        });
+        div.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (areNumbersEmpty(num1,num2))
+                {
+                    return;
+                }
+                else{
+                    float number1=Float.parseFloat(num1.getText().toString());
+                    float number2=Float.parseFloat(num2.getText().toString());
+                    float result=number1/number2;
+                    tv.setText(String.valueOf(result));
+
+                }
+
+
+            }
+        });
+
+
+
+            }
+        }

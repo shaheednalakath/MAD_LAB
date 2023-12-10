@@ -1,0 +1,97 @@
+login
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="username" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="password" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="login" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="logout" />
+</RelativeLayout>
+
+
+
+
+
+
+package com.example.login;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        EditText username=findViewById(R.id.username);
+        EditText password=findViewById(R.id.password);
+        Button login=findViewById(R.id.login);
+        Button logout=findViewById(R.id.logout);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((username.getText().toString().equals("shaheed")) && (password.getText().toString().equals("1234")))
+                {
+                    Toast.makeText(MainActivity.this, "login success", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "login fail", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                username.setText(" ");
+                password.setText(" ");
+                Toast.makeText(MainActivity.this, "logout successfully", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+}
